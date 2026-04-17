@@ -1,81 +1,206 @@
-# Backend Test Eigen
+# 📚 Library Management API - Eigen Backend Test
 
-A Node.js backend application built with Express.js and TypeScript for managing library book borrowing system.
+This project is a backend API built to fulfill the technical test requirements from PT Eigen Tri Mathema.
 
-## Requirements Met
+---
 
-- ✅ ExpressJS Framework with TypeScript
-- ✅ Swagger API Documentation
-- ✅ Database (SQLite with Prisma ORM)
-- ✅ Entities: Member, Book
-- ✅ Borrowing/Returning logic with business rules
-- ✅ Unit Tests (Jest)
+## 🚀 Tech Stack
 
-## Features
+* Node.js (Express)
+* TypeScript
+* Prisma ORM
+* SQLite
+* Swagger (API Documentation)
 
-### Members
-- List all members with their borrowed book count
+---
 
-### Books
-- List all books with available stock (excluding borrowed ones)
+## 📦 Installation
 
-### Borrowing
-- Borrow up to 2 books per member
-- Cannot borrow if under penalty
-- Stock validation
+Clone the repository:
 
-### Returning
-- Return borrowed books
-- Penalty (3 days) if returned after 7 days
+```bash
+git clone https://github.com/superizky27/backend-test-eigen
+cd backend-test-eigen
+```
 
-## Setup
+Install dependencies:
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
 
-2. Set up database:
-   ```bash
-   npx prisma migrate dev
-   npx prisma db seed
-   ```
+---
 
-3. Run development server:
-   ```bash
-   npm run dev
-   ```
+## ⚙️ Setup Database
 
-4. Run tests:
-   ```bash
-   npm test
-   ```
+Run migration:
 
-## API Endpoints
+```bash
+npx prisma migrate dev
+```
 
-- `GET /books` - Get all books
-- `GET /members` - Get all members
-- `POST /borrow` - Borrow a book (body: { memberCode, bookCode })
-- `POST /return` - Return a book (body: { memberCode, bookCode })
-- `GET /api-docs` - Swagger documentation
+Seed initial data:
 
-## Mock Data
+```bash
+npx ts-node prisma/seed.ts
+```
 
-### Books
-- JK-45: Harry Potter
-- SHR-1: A Study in Scarlet
-- TW-11: Twilight
-- HOB-83: The Hobbit
-- NRN-7: The Lion, the Witch and the Wardrobe
+---
 
-### Members
-- M001: Angga
-- M002: Ferry
-- M003: Putri
+## ▶️ Run Server
 
-## Business Rules
+```bash
+npm run dev
+```
 
-- Members can borrow max 2 books
-- Borrowed books are not available for others
-- Penalty prevents borrowing for 3 days
-- Penalty applied if book returned after 7 days
+Server will run at:
+
+```
+http://localhost:3000
+```
+
+---
+
+## 📑 API Documentation
+
+Swagger documentation is available at:
+
+```
+http://localhost:3000/api-docs
+```
+
+
+### 📸 Preview
+
+#### Overview
+![Swagger Overview](./assets/swagger.png)
+
+#### Borrow Endpoint Example
+![Borrow Endpoint](./assets/swagger-borrow.png)
+
+---
+
+## 📌 API Endpoints
+
+### 📚 Books
+
+* `GET /books` → Get all books
+
+---
+
+### 👤 Members
+
+* `GET /members` → Get all members with total borrowed books
+
+---
+
+### 📥 Borrow Book
+
+* `POST /borrow`
+
+Request body:
+
+```json
+{
+  "memberCode": "M001",
+  "bookCode": "JK-45"
+}
+```
+
+Response (Success):
+
+```json
+{
+  "success": true,
+  "data": {
+    "memberCode": "M001",
+    "bookCode": "JK-45"
+  }
+}
+```
+
+Response (Error):
+
+```json
+{
+  "success": false,
+  "message": "Book not available"
+}
+```
+
+---
+
+### 📤 Return Book
+
+* `POST /return`
+
+Request body:
+
+```json
+{
+  "memberCode": "M001",
+  "bookCode": "JK-45"
+}
+```
+
+Response:
+
+```json
+{
+  "success": true,
+  "message": "Book returned successfully"
+}
+```
+
+---
+
+## ⚠️ Business Rules
+
+* Each member can borrow a maximum of **2 books**
+* Books can only be borrowed if **stock is available**
+* Members **cannot borrow during penalty period**
+* Penalty rules:
+
+  * If a book is returned after more than **7 days**
+  * The member will be penalized for **3 days**
+
+---
+
+## 📂 Project Structure
+
+```
+src/
+ ├── controllers/
+ ├── services/
+ ├── routes/
+ ├── database/
+ └── app.ts
+```
+
+---
+
+## ✨ Features
+
+* Clean architecture (Controller → Service → Database)
+* RESTful API design
+* Database integration with Prisma ORM
+* Swagger API documentation
+* Business logic implementation (borrow, return, penalty, stock management)
+* Error handling
+
+---
+
+## 🧠 Notes
+
+This project is designed to demonstrate backend development skills including:
+
+* API development using Express + TypeScript
+* Database management using Prisma
+* Handling business logic and edge cases
+* Writing clean and maintainable code
+
+---
+
+## 📬 Author
+
+**Rizky Ilhamsyah**
