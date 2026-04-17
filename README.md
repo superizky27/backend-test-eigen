@@ -51,6 +51,60 @@ A Node.js backend application built with Express.js and TypeScript for managing 
    npm test
    ```
 
+## Deployment
+
+This backend API can be deployed on hosting platforms such as Railway, Heroku, or Vercel.
+
+### Railway
+
+1. Push this repository to GitHub.
+2. Create a new project in Railway.
+3. Connect your GitHub repository.
+4. Set the build command to:
+   ```bash
+   npm install
+   npm run build
+   ```
+5. Set the start command to:
+   ```bash
+   npm start
+   ```
+
+### Heroku
+
+1. Install the Heroku CLI and log in:
+   ```bash
+   heroku login
+   ```
+2. Create a new Heroku app:
+   ```bash
+   heroku create your-app-name
+   ```
+3. Deploy the repository:
+   ```bash
+   git push heroku master
+   ```
+4. The app will use the `Procfile` included in this repository.
+
+### Vercel
+
+Vercel is designed for serverless deployments, but you can also deploy a Node.js backend with a custom server.
+
+1. Install the Vercel CLI and log in:
+   ```bash
+   npm install -g vercel
+   vercel login
+   ```
+2. Deploy the app:
+   ```bash
+   vercel
+   ```
+3. If needed, use a custom build command: `npm install && npm run build`.
+
+### Note
+
+GitHub Pages is only for static sites and is not suitable for this backend API.
+
 ## API Endpoints
 
 - `GET /books` - Get all books
