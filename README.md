@@ -28,12 +28,6 @@ A Node.js backend application built with Express.js and TypeScript for managing 
 - Return borrowed books
 - Penalty (3 days) if returned after 7 days
 
-### Algorithm Challenge
-- Reverse letters while keeping numeric suffixes fixed
-- Find the longest word in a sentence
-- Count how many times query words appear in an array
-- Calculate the diagonal difference of an NxN matrix
-
 ## Setup
 
 1. Install dependencies:
