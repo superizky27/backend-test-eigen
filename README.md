@@ -1,0 +1,81 @@
+# Backend Test Eigen
+
+A Node.js backend application built with Express.js and TypeScript for managing library book borrowing system.
+
+## Requirements Met
+
+- ✅ ExpressJS Framework with TypeScript
+- ✅ Swagger API Documentation
+- ✅ Database (SQLite with Prisma ORM)
+- ✅ Entities: Member, Book
+- ✅ Borrowing/Returning logic with business rules
+- ✅ Unit Tests (Jest)
+
+## Features
+
+### Members
+- List all members with their borrowed book count
+
+### Books
+- List all books with available stock (excluding borrowed ones)
+
+### Borrowing
+- Borrow up to 2 books per member
+- Cannot borrow if under penalty
+- Stock validation
+
+### Returning
+- Return borrowed books
+- Penalty (3 days) if returned after 7 days
+
+## Setup
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Set up database:
+   ```bash
+   npx prisma migrate dev
+   npx prisma db seed
+   ```
+
+3. Run development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Run tests:
+   ```bash
+   npm test
+   ```
+
+## API Endpoints
+
+- `GET /books` - Get all books
+- `GET /members` - Get all members
+- `POST /borrow` - Borrow a book (body: { memberCode, bookCode })
+- `POST /return` - Return a book (body: { memberCode, bookCode })
+- `GET /api-docs` - Swagger documentation
+
+## Mock Data
+
+### Books
+- JK-45: Harry Potter
+- SHR-1: A Study in Scarlet
+- TW-11: Twilight
+- HOB-83: The Hobbit
+- NRN-7: The Lion, the Witch and the Wardrobe
+
+### Members
+- M001: Angga
+- M002: Ferry
+- M003: Putri
+
+## Business Rules
+
+- Members can borrow max 2 books
+- Borrowed books are not available for others
+- Penalty prevents borrowing for 3 days
+- Penalty applied if book returned after 7 days
